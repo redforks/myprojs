@@ -2,7 +2,7 @@
 
 `myprojs` is a python script manages git directories.
 
-If you like me have many projects use `git` as source repository, you'll known the pain of forget to `push` your source code.
+If you like me have many projects use `git` as source repository, you'll know the pain of forget to `push` your source code.
 
 Use `myprojs` to cure the pain:
 
@@ -38,17 +38,18 @@ myprojs.py -- jest
 
 `jest` or other unit tests tool, will execute at each project's directory.
 
-## Project Type
+## Project Types
 
-Project directory list stored in `~/.myprojs` directory, file is
-a text file, each line is a project directory. Ignore lines starts
-with `'#'`. Each file defines a project type, such as:
+Project type is a file located at `~/.myprojs`, file is a text file each line
+is a project directory. Lines start with `'#'` are comments and ignored. Such as:
 
 ```
 cat ~/.myprojs/chat
 
+# ~/chat/client.old
 ~/chat/server
 ~/chat/client
+# db and other useful scripts
 ~/chat/scripts
 
 cat ~/myprojs/bbs
@@ -59,17 +60,17 @@ cat ~/myprojs/bbs
 
 ```
 
-Define your projects, run command on specified project group:
+Project type selected by `--project-type` command argument, to run
+tests on `'chat'` projects:
 
 ```
-myprojs.py --project-type chat --dirty --push
+myprojs.py --project-type chat -- yarn test
 ```
 
-A special project type is `'all'`, include project directory of all
-project types. `'all'` is default.
+`'all'` is a special project type, combines all project types, and is the default value of `'--project-type'` argument.
 
 Duplicate directories are ignored, especially useful for `all` project type.
 
 ## Install
 
-`myproj.py` is a simple python script, download and mark it as executable, put it into one of `PATH` directory.
+`myproj.py` is a simple python script, download and mark it as executable, put it into one of your `PATH` directories.
