@@ -3,6 +3,7 @@
 import argparse
 import os
 import os.path
+import sys
 from subprocess import run, PIPE
 
 
@@ -77,7 +78,7 @@ def load_projects(proj_set):
 
     def dir_exist(d):
         if not os.path.exists(d):
-            print(d, 'not exist')
+            print(d, 'not exist', file=sys.stderr)
             return False
         return True
 
