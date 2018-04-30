@@ -90,7 +90,7 @@ def load_projects(proj_set):
     lines = [l for l in lines if l and not l.startswith('#')]
     lines = list(set(lines))
     lines = [os.path.expanduser(l) for l in lines]
-    return remove_dup(filter(dir_exist, lines))
+    return filter(dir_exist, lines)
 
 
 def remove_dup(strs):
