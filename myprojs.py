@@ -5,6 +5,7 @@ import os
 import os.path
 import sys
 from subprocess import run, PIPE
+from glob import glob
 
 
 parser = argparse.ArgumentParser(description="Manage my project directories")
@@ -90,7 +91,11 @@ def load_projects(proj_set):
     lines = [l for l in lines if l and not l.startswith('#')]
     lines = list(set(lines))
     lines = [os.path.expanduser(l) for l in lines]
-    return filter(dir_exist, lines)
+
+    dirs = []
+    for l in lines:
+        dirs.extend(glob(l))
+    return filter(dir_exist, dirs)
 
 
 def remove_dup(strs):
