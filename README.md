@@ -54,10 +54,8 @@ cat ~/.myprojs/chat
 
 cat ~/myprojs/bbs
 
-~/bbs/list
-~/bbs/article
-~/bbs/backend
-
+~/bbs/*
+-~/bbs/try-server
 ```
 
 Project type selected by `--project-type` command argument, to run
@@ -69,7 +67,12 @@ myprojs.py --project-type chat -- yarn test
 
 `'all'` is a special project type, combines all project types, and is the default value of `'--project-type'` argument.
 
-Duplicate directories are ignored, especially useful for `all` project type.
+## Note
+
+1. Duplicate directories are ignored, especially useful for `all` project type.
+1. Non-git directories are ignored
+1. Support '\*' glob,
+1. Directories prefixed with '-' are exclude, use it to excludes globed directory.
 
 ## Install
 

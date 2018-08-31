@@ -83,19 +83,29 @@ def load_projects(proj_set):
             return False
         return True
 
+    def is_git_dir(d):
+        return os.path.exists(os.path.join(d, '.git'))
+
+    def not_excluded(d):
+        return all(not d.startswith(x) for x in excludes)
+
+    def qualified(d):
+        return not_excluded(d) and dir_exist(d) and is_git_dir(d)
+
     fn = os.path.join(proj_set_dir, proj_set)
     with open(fn) as f:
         lines = f.readlines()
 
     lines = [l.strip() for l in lines]
     lines = [l for l in lines if l and not l.startswith('#')]
-    lines = list(set(lines))
-    lines = [os.path.expanduser(l) for l in lines]
+    excludes = [os.path.expanduser(l[1:]) for l in lines if l.startswith('-')]
+    lines = [os.path.expanduser(l) for l in lines if not l.startswith('-')]
 
     dirs = []
     for l in lines:
         dirs.extend(glob(l))
-    return filter(dir_exist, dirs)
+
+    return filter(qualified, dirs)
 
 
 def remove_dup(strs):
