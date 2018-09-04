@@ -4,9 +4,11 @@ import argparse
 import os
 import os.path
 import sys
+import locale
 from subprocess import run, PIPE
 from glob import glob
 
+locale.setlocale(locale.LC_ALL, 'C')
 
 parser = argparse.ArgumentParser(description="Manage my project directories")
 parser.add_argument("--dirty", help="filter out dirty work directories",
